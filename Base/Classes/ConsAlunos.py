@@ -1,5 +1,7 @@
+from flask import Flask, request, jsonify
 import RegAlunos
 
+app = Flask(__name__)
 alunos = [RegAlunos.Aluno]
 
 def buscaTodos ():
@@ -21,3 +23,11 @@ def buscaAluno (aluno: RegAlunos.Aluno):
     for a in alunos:
         if aluno.nome == a.nome and aluno.matricula == a.matricula: 
             return a
+        
+@app.route('/aluno', methods=['GET'])
+def aluno():
+    if request.method == "GET": 
+        return jsonify({"response": "Aluno"})
+    
+if __name__ == '__main__':
+    app.run(debug=True, port=9090)
