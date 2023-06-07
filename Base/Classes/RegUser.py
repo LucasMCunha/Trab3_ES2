@@ -9,16 +9,16 @@ class User ():
         self.senha = senha
 
 
-def Register (nome: str, email: str, senha: str):
-    a = User(nome, email, senha)
-    #colocar no BD
-
 @app.route('/User', methods=['POST'])
-def user():
+def Register ():
     if request.method == "POST":
         req = request.args
         name = req['name']
-        return jsonify({"response": f"Post Request Called. Name: {name}"})
+        email = req['email']
+        senha = req['senha']
+        a = User(name, email, senha)
+        #colocar no BD
+        return jsonify({"response": f"Post Request Called. Name: {name}, Email: {email}"})
     
 if __name__ == '__main__':
     app.run(debug=True, port=9090)

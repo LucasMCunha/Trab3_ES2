@@ -9,18 +9,18 @@ class Disciplina ():
         self.horario = horario
         self.turma = turma
 
-
-
-def Register (codigo: int,nome: str, horario: str, turma: int):
-    a = Disciplina(codigo, nome, horario, turma)
-    #colocar no BD
     
 @app.route('/disc', methods=['POST'])
-def disciplina():
+def Register ():
     if request.method == "POST":
         req = request.args
+        codigo = req['codigo']
         name = req['name']
-        return jsonify({"response": f"Post Request Called. Name: {name}"})
+        horario = req['horario']
+        turma = req['turma']
+        a = Disciplina(codigo, name, horario, turma)
+        #colocar no BD
+        return jsonify({"response": f"Post Request Called. Codigo {codigo}, Name: {name}, Horario {horario}, Turma {turma}"})
  
 if __name__ == '__main__':
     app.run(debug=True, port=9090)

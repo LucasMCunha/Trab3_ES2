@@ -11,20 +11,19 @@ class Aluno ():
         self.matricula = matricula
 
 
-
-def Register (nome: str, numeroDoc: int, endereco: str):
-    matricula = matricula + 1
-    a = Aluno(nome, numeroDoc, endereco, matricula)
-    #colocar no BD
-
 @app.route('/aluno', methods=['POST'])
-def aluno():
+def Register ():
+    global matricula
+    matricula = matricula + 1
+    #colocar no BD
     if request.method == "POST":
         req = request.args
         name = req['name']
         numId= req['number ID']
         add = req['address']
-        return jsonify({"response": f"Post Request Called. Name: {name}, Number of ID: {numId}, Address: {add}"})
+        
+        a = Aluno(name, numId, add, matricula)
+        return jsonify({"response": f"Post Request Called. Name: {name}, Number of ID: {numId}, Address: {add}, Matricula: {matricula}"})
  
 if __name__ == '__main__':
     app.run(debug=True, port=9090)
