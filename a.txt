@@ -1,0 +1,1 @@
+&& python3 AutUser.py && python3 RegAlunos.py && python3 RegDisciplinas.py && python3 RegMatDisci.py && RegUser.py

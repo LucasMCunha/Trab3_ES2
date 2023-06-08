@@ -2,16 +2,23 @@ version: '3'
 
 services:
   regalunos:
-    build: .
+    build: 
+      context: Base/Classes
+      dockerfile: Dockerfile
     ports:
       - 5000:5000
     depends_on:
       - db
+
+    environment:
+        MYSQL_HOST: 'db'
+        MYSQL_PASSWORD: 'root'
       #ver como subir aplicacao flask como container
   db:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: ES2
     ports:
       - 6000:3306
 
