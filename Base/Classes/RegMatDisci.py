@@ -11,7 +11,18 @@ class MatriculaDisciplina ():
         self.aluno = aluno
         self.disciplinas = disciplinas
 
-def Register (aluno: RegAlunos.Aluno, disciplinas):
+@app.route('/matdisc', methods=['POST'])
+def Register ():
+    req = request.args
+    nameA = req['name aluno']
+    mat = req['matricula']
+    req = request.args
+    codigo = req['codigo']
+    nameD = req['name disciplina']
+    horario = req['horario']
+    turma = req['turma']
+    return jsonify({"response": f"Post Request Called. Name: {nameA}"})
+
     a = MatriculaDisciplina(aluno, disciplinas)
     #colocar no BD
     

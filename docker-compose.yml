@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  regalunos:
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      #ver como subir aplicacao flask como container
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - 6000:3306
+

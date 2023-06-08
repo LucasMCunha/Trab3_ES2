@@ -2,15 +2,12 @@ from flask import Flask, request, jsonify
 import RegAlunos
 
 app = Flask(__name__)
-alunos = [RegAlunos.Aluno]
-alunos.append(RegAlunos.Register("a", 111, "A"))
-alunos.append(RegAlunos.Register("b", 222, "B"))
-alunos.append(RegAlunos.Register("c", 333, "C"))
+alunos = []
+alunos.append(RegAlunos.Aluno("a", 111, "A", 1))
 
 @app.route('/alunos/todos', methods=['GET'])
-def buscaTodos ():
-    if request.method == "GET": 
-        return alunos
+def buscaTodos (): 
+    return alunos
 
 @app.route('/alunos/nome', methods=['GET'])
 def buscaNome ():
@@ -43,4 +40,4 @@ def buscaAluno (aluno: RegAlunos.Aluno):
             return a
     
 if __name__ == '__main__':
-    app.run(debug=True, port=9090)
+    app.run(debug=True, port=9091)
