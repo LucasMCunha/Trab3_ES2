@@ -26,4 +26,5 @@ def Register ():
         return jsonify({"response": f"Post Request Called. Name: {name}, Number of ID: {numId}, Address: {add}, Matricula: {matricula}"})
  
 if __name__ == '__main__':
+    print("foi")
     app.run(debug=True)

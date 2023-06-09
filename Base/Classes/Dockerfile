@@ -6,6 +6,6 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . ConsAlunos.py
+COPY ConsAlunos.py .
 
-CMD python3 ConsAlunos.py 
+CMD ["python", "ConsAlunos.py"]
