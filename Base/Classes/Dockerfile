@@ -1,5 +1,9 @@
 FROM python:3.9-alpine
 
+ARG FLASK_APP
+
+ENV FLASK_APP=$FLASK_APP
+
 WORKDIR /Base/Classes
 
 COPY requirements.txt .
@@ -8,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ConsAlunos.py .
 
-CMD ["python", "ConsAlunos.py"]
+CMD [ "flask", "run", "--host=0.0.0.0" ]

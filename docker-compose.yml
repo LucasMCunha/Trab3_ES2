@@ -5,13 +5,16 @@ services:
     build: 
       context: Base/Classes
       dockerfile: Dockerfile
+      args:
+        FLASK_APP: ConsAlunos.py
+
     ports:
       - 5000:5000
     depends_on:
       - db
 
     environment:
-        MYSQL_HOST: 'db'
+        MYSQL_HOST: ES2
         MYSQL_PASSWORD: 'root'
       #ver como subir aplicacao flask como container
   db:
