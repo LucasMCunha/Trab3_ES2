@@ -2,12 +2,28 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-class User ():
-    def __init__(self,nome: str,email: str,senha: str):
-        self.nome = nome
-        self.email = email
-        self.senha = senha
+import mysql.connector
 
+def inserir_dados(dados):
+    # Estabelecer conexão com o banco de dados
+    conexao = mysql.connector.connect(
+        host='localhost',
+        password='root',
+        database='users'
+    )
+
+    cursor = conexao.cursor()
+
+    sql = "INSERT INTO tabela (ID, Nome, Email, Senha) VALUES (%d, %s, %s, %s)"
+
+    cursor.execute(sql, dados)
+
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()
+
+id = 0
 
 @app.route('/User', methods=['POST'])
 def Register ():
@@ -16,9 +32,10 @@ def Register ():
         name = req['name']
         email = req['email']
         senha = req['senha']
-        a = User(name, email, senha)
-        #colocar no BD
-        return jsonify({"response": f"Post Request Called. Name: {name}, Email: {email}"})
+        a = inserir_dados(id, name, email, senha)
+        id = id + 1
+        
+        return jsonify({"response": f"Usuário {name} com email: {email} cadastrado com sucesso!"})
     
 @app.route('/ola', methods=['GET'])
 def ola():
