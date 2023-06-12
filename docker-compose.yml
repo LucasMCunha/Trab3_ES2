@@ -39,7 +39,7 @@ services:
       - 5001:5000
 
     depends_on:
-      - db
+      - dbUsers
  
     environment:
         MYSQL_PASSWORD: 'root'
@@ -85,7 +85,7 @@ services:
       - 5003:5000
 
     depends_on:
-      - db
+      - dbDisciplinas
  
     environment:
         MYSQL_PASSWORD: 'root'
@@ -108,7 +108,7 @@ services:
       - 5007:5000
 
     depends_on:
-      - db
+      - dbAlunosDisciplinas
  
     environment:
         MYSQL_PASSWORD: 'root'
@@ -131,7 +131,7 @@ services:
       - 5005:5000
 
     depends_on:
-      - db
+      - dbUsers
  
     environment:
         MYSQL_PASSWORD: 'root'
