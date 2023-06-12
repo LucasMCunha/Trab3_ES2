@@ -1,13 +1,14 @@
 version: '3'
- 
+
 services:
-  regalunos:
+
+  consalunos:
 
     container_name: sconsultar_alunos
 
     build:
       context: Base/Classes
-      dockerfile: Dockerfile
+      dockerfile: DockerfileConsAlunos
       args:
         FLASK_APP: ConsAlunos.py
  
@@ -22,6 +23,124 @@ services:
 
     networks:
       - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+
+  autuser:
+    container_name: autenticar_alunos
+
+    build:
+      context: Base/Classes
+      dockerfile: DockerfileAutUser
+      args:
+        FLASK_APP: AutUser.py
+
+    ports:
+      - 5001:5000
+
+    depends_on:
+      - db
+ 
+    environment:
+        MYSQL_PASSWORD: 'root'
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+
+  regalunos:
+    container_name: registrar_alunos
+
+    build:
+      context: Base/Classes
+      dockerfile: DockerfileRegAlunos
+      args:
+        FLASK_APP: RegAlunos.py
+
+    ports:
+      - 5002:5000
+
+    depends_on:
+      - db
+ 
+    environment:
+        MYSQL_PASSWORD: 'root'
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+
+  regdisciplinas:
+    container_name: registrar_disciplinas
+
+    build:
+      context: Base/Classes
+      dockerfile: DockerfileRegDisciplinas
+      args:
+        FLASK_APP: RegDisciplinas.py
+
+    ports:
+      - 5003:5000
+
+    depends_on:
+      - db
+ 
+    environment:
+        MYSQL_PASSWORD: 'root'
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+
+  regmatdisc:
+    container_name: registrar_matdisc
+
+    build:
+      context: Base/Classes
+      dockerfile: DockerfileRegMatDisci
+      args:
+        FLASK_APP: RegMatDisci.py
+
+    ports:
+      - 5007:5000
+
+    depends_on:
+      - db
+ 
+    environment:
+        MYSQL_PASSWORD: 'root'
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+
+  reguser:
+    container_name: registrar_usuario
+
+    build:
+      context: Base/Classes
+      dockerfile: DockerfileRegUser
+      args:
+        FLASK_APP: RegUser.py
+
+    ports:
+      - 5005:5000
+
+    depends_on:
+      - db
+ 
+    environment:
+        MYSQL_PASSWORD: 'root'
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+  
   db:
     container_name: db
 

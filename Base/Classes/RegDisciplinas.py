@@ -21,6 +21,10 @@ def Register ():
         a = Disciplina(codigo, name, horario, turma)
         #colocar no BD
         return jsonify({"response": f"Post Request Called. Codigo {codigo}, Name: {name}, Horario {horario}, Turma {turma}"})
+    
+@app.route('/ola', methods=['GET'])
+def ola():
+    return "Ola"
  
 if __name__ == '__main__':
-    app.run(debug=True, port=9090)
+    app.run(debug=True)

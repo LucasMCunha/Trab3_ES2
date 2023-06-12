@@ -8,6 +8,10 @@ app = Flask(__name__)
 def aluno():
     if request.method == "GET": 
         return jsonify({"response": "User"})
+    
+@app.route('/ola', methods=['GET'])
+def ola():
+    return "ola"
 
 if __name__ == '__main__':
-    app.run(debug=True, port=9090)
+    app.run(debug=True)

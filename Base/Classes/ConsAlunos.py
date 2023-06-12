@@ -19,7 +19,7 @@ alunos = [
 
 @app.route('/alunos/todos', methods=['GET'])
 def buscaTodos (): 
-    return alunos
+    return jsonify(alunos)
 
 @app.route('/alunos/nome', methods=['GET'])
 def buscaNome ():
@@ -53,5 +53,4 @@ def buscaAluno():
     return "Aluno não encontrado"
 
 if __name__ == '__main__':
-    print("TESTE")
     app.run(debug=True)

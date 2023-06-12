@@ -24,6 +24,10 @@ def Register ():
         a = Aluno(name, numId, add, matricula)
         #colocar no BD
         return jsonify({"response": f"Post Request Called. Name: {name}, Number of ID: {numId}, Address: {add}, Matricula: {matricula}"})
+    
+@app.route('/ola', methods=['GET'])
+def ola():
+    return "Ola"
  
 if __name__ == '__main__':
     app.run(debug=True)

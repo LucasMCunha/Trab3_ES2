@@ -20,5 +20,9 @@ def Register ():
         #colocar no BD
         return jsonify({"response": f"Post Request Called. Name: {name}, Email: {email}"})
     
+@app.route('/ola', methods=['GET'])
+def ola():
+    return "Ola reg user"
+    
 if __name__ == '__main__':
-    app.run(debug=True, port=9090)
+    app.run(debug=True)
