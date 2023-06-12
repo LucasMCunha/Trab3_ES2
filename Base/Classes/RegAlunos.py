@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-matricula = 0
+matricula = 1
 
 import mysql.connector
 

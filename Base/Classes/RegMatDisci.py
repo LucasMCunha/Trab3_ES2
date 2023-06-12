@@ -49,12 +49,16 @@ def obter_dados():
     # Retornar os resultados
     return resultados
 
+id = 4
+
 @app.route('/matdisc', methods=['POST'])
 def Register ():
+    global id
     req = request.args
     mat = req['matricula']
     codigo = req['codigo']
-    inserir_dados(mat, codigo)
+    inserir_dados(id, mat, codigo)
+    id = id + 1
     return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Codigo: {codigo}"})
 
 @app.route('/matdiscDisciplina', methods=['GET'])

@@ -1,11 +1,14 @@
-CREATE DATABASE alunos_disciplinas;
-use alunos_disciplinas;
-
--- Tabela "Matriculas" no micro serviço "RegMatDisci"
+-- Tabela Matriculas
 CREATE TABLE Matriculas (
-  Matricula INT,
-  CodigoDisciplina INT,
-  PRIMARY KEY (Matricula, CodigoDisciplina),
-  FOREIGN KEY (Matricula) REFERENCES Alunos(Matricula),
-  FOREIGN KEY (CodigoDisciplina) REFERENCES Disciplinas(CodigoDisciplina)
+  Id INT PRIMARY KEY,
+  AlunoMatricula INT NOT NULL,
+  DisciplinaCodigo INT NOT NULL,
+  DisciplinaTurma INT NOT NULL,
+  FOREIGN KEY (AlunoMatricula) REFERENCES Alunos (Matricula),
+  FOREIGN KEY (DisciplinaCodigo, DisciplinaTurma) REFERENCES Disciplinas (CodigoDisciplina, Turma)
 );
+
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (0, 0, 0, 10)
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (1, 1, 0, 10)
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (2, 0, 1, 30)
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (3, 1, 1, 31)

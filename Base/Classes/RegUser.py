@@ -23,10 +23,11 @@ def inserir_dados(dados):
     cursor.close()
     conexao.close()
 
-id = 0
+id = 1
 
 @app.route('/User', methods=['POST'])
 def Register ():
+    global id
     if request.method == "POST":
         req = request.args
         name = req['name']

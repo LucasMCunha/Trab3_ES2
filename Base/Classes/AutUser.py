@@ -15,7 +15,7 @@ def obter_dados():
     cursor = conexao.cursor()
 
     # Instrução SQL para selecionar os dados
-    sql = "SELECT Email, Senha FROM Usuarios"
+    sql = "SELECT Email, Senha, Nome FROM Usuarios"
 
     # Executar a consulta SQL
     cursor.execute(sql)
@@ -37,8 +37,8 @@ def aluno():
     senha = req['senha']
     for d in obter_dados():
         if email == d[0] and senha == d[1]:
-            return jsonify({"response": "Usuario encontrado"})
-    return jsonify({"response": "Usuario não encontrado"})
+            return jsonify({"response": f"Usuario encontrado, bem vindo {d[2]}"})
+    return jsonify({"response": "Usuario não encontrado, email ou senha inválido"})
     
 @app.route('/ola', methods=['GET'])
 def ola():
