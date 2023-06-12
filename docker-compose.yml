@@ -16,7 +16,7 @@ services:
       - 5000:5000
 
     depends_on:
-      - db
+      - dbAlunos
  
     environment:
         MYSQL_PASSWORD: 'root'
@@ -27,7 +27,7 @@ services:
 #-------------------------------------------------------------------------------------------------------------
 
   autuser:
-    container_name: autenticar_alunos
+    container_name: autenticar_usuarios
 
     build:
       context: Base/Classes
@@ -62,7 +62,7 @@ services:
       - 5002:5000
 
     depends_on:
-      - db
+      - dbAlunos
  
     environment:
         MYSQL_PASSWORD: 'root'
@@ -141,8 +141,8 @@ services:
 
 #-------------------------------------------------------------------------------------------------------------
   
-  db:
-    container_name: db
+  dbAlunos:
+    container_name: dbAlunos
 
     image: mysql:latest
 
@@ -153,8 +153,71 @@ services:
       - 6000:3306
     
     volumes:
-      - db:/var/lib/mysql
-      - ./DataBase/tabelas.sql:/data/application/tabelas.sql
+      - dbAlunos:/var/lib/mysql
+      - ./DataBase/alunosDB.sql:/data/application/alunosDB.sql
+    
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+ 
+  dbDisciplinas:
+    container_name: dbDisciplinas
+
+    image: mysql:latest
+
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+
+    ports:
+      - 6000:3306
+    
+    volumes:
+      - dbDisciplinas:/var/lib/mysql
+      - ./DataBase/disciplinasDB.sql:/data/application/disciplinasDB.sql
+    
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+ 
+  dbUsers:
+    container_name: dbUsers
+
+    image: mysql:latest
+
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+
+    ports:
+      - 6000:3306
+    
+    volumes:
+      - dbUsers:/var/lib/mysql
+      - ./DataBase/usersDB.sql:/data/application/usersDB.sql
+    
+
+    networks:
+      - redecomum
+
+#-------------------------------------------------------------------------------------------------------------
+ 
+  dbAlunosDisciplinas:
+    container_name: dbAlunosDisciplinas
+
+    image: mysql:latest
+
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+
+    ports:
+      - 6000:3306
+    
+    volumes:
+      - dbAlunosDisciplinas:/var/lib/mysql
+      - ./DataBase/alunos_disciplinasDB.sql:/data/application/alunos_disciplinasDB.sql
     
 
     networks:
@@ -164,4 +227,7 @@ networks:
   redecomum:
 
 volumes:
-  db:
+  dbAlunos:
+  dbDisciplinas:
+  dbUsers:
+  dbAlunosDisciplinas:
