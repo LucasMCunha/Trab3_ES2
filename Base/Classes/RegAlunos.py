@@ -8,15 +8,18 @@ import mysql.connector
 def inserir_dados(dados):
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
-        host='localhost',
+        host='dbAlunos',
+        user='root',
         password='root',
         database='alunos'
     )
 
     cursor = conexao.cursor()
 
-    sql = "INSERT INTO tabela (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (%d, %s, %d, %s)"
+    # sql = "INSERT INTO Alunos (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (1, \"a\", 1, \"poa\")"
+    sql = "INSERT INTO Alunos (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (%d, %s, %d, %s)"
 
+    # cursor.execute(sql)
     cursor.execute(sql, dados)
 
     conexao.commit()
@@ -34,7 +37,8 @@ def Register ():
         name = req['name']
         numId= req['number ID']
         add = req['address']
-        inserir_dados(matricula, name, numId, add)
+        #mudar
+        inserir_dados((matricula, name, numId, add))
         return jsonify({"response": f"Novo aluno cadastrado. Name: {name}, Number of ID: {numId}, Address: {add}, Matricula: {matricula}"})
     
 @app.route('/ola', methods=['GET'])

@@ -10,5 +10,5 @@ CREATE TABLE Alunos (
 );
 
 
-INSERT INTO Alunos (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (0, "João", 123456789, "Rua A")
-INSERT INTO Alunos (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (1, "Maria", 987654321, "Rua 1")
+INSERT INTO Alunos (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (0, "João", 123456789, "Rua A");
+INSERT INTO Alunos (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (1, "Maria", 987654321, "Rua 1");

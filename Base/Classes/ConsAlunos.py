@@ -22,7 +22,8 @@ import mysql.connector
 def obter_dados():
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
-        host='localhost',
+        host='dbAlunos',
+        user='root',
         password='root',
         database='alunos'
     )

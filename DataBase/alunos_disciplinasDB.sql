@@ -1,4 +1,7 @@
 -- Tabela Matriculas
+CREATE DATABASE alunosDisciplinas;
+use alunosDisciplinas;
+
 CREATE TABLE Matriculas (
   Id INT PRIMARY KEY,
   AlunoMatricula INT NOT NULL,

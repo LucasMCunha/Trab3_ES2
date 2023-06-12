@@ -4,7 +4,7 @@ services:
 
   consalunos:
 
-    container_name: sconsultar_alunos
+    container_name: consultar_alunos
 
     build:
       context: Base/Classes
@@ -145,6 +145,8 @@ services:
     container_name: dbAlunos
 
     image: mysql:latest
+    
+    command: --init-file /data/application/alunosDB.sql
 
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
@@ -171,7 +173,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
 
     ports:
-      - 6000:3306
+      - 6001:3306
     
     volumes:
       - dbDisciplinas:/var/lib/mysql
@@ -192,7 +194,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
 
     ports:
-      - 6000:3306
+      - 6002:3306
     
     volumes:
       - dbUsers:/var/lib/mysql
@@ -213,7 +215,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
 
     ports:
-      - 6000:3306
+      - 6003:3306
     
     volumes:
       - dbAlunosDisciplinas:/var/lib/mysql
