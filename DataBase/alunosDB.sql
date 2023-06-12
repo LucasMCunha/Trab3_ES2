@@ -5,6 +5,6 @@ use alunos;
 CREATE TABLE Alunos (
   Matricula INT PRIMARY KEY,
   Nome VARCHAR(100),
-  DocumentoIdentificacao VARCHAR(20),
+  DocumentoIdentificacao INT,
   Endereco VARCHAR(200)
 );

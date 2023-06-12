@@ -3,12 +3,26 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 matricula = 0
 
-class Aluno ():
-    def __init__(self,nome: str,numeroDoc: int,endereco: str,matricula: int):
-        self.nome = nome
-        self.numeroDoc = numeroDoc
-        self.endereco = endereco
-        self.matricula = matricula
+import mysql.connector
+
+def inserir_dados(dados):
+    # Estabelecer conexão com o banco de dados
+    conexao = mysql.connector.connect(
+        host='localhost',
+        password='root',
+        database='alunos'
+    )
+
+    cursor = conexao.cursor()
+
+    sql = "INSERT INTO tabela (Matricula, Nome, DocumentoIdentificacao, Endereco) VALUES (%d, %s, %d, %s)"
+
+    cursor.execute(sql, dados)
+
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()
 
 
 @app.route('/aluno', methods=['POST'])
@@ -20,10 +34,8 @@ def Register ():
         name = req['name']
         numId= req['number ID']
         add = req['address']
-        
-        a = Aluno(name, numId, add, matricula)
-        #colocar no BD
-        return jsonify({"response": f"Post Request Called. Name: {name}, Number of ID: {numId}, Address: {add}, Matricula: {matricula}"})
+        inserir_dados(matricula, name, numId, add)
+        return jsonify({"response": f"Novo aluno cadastrado. Name: {name}, Number of ID: {numId}, Address: {add}, Matricula: {matricula}"})
     
 @app.route('/ola', methods=['GET'])
 def ola():

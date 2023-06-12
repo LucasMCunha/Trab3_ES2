@@ -2,12 +2,43 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-#def ...
+import mysql.connector
+
+def obter_dados():
+    # Estabelecer conexão com o banco de dados
+    conexao = mysql.connector.connect(
+        host='localhost',
+        password='root',
+        database='users'
+    )
+
+    cursor = conexao.cursor()
+
+    # Instrução SQL para selecionar os dados
+    sql = "SELECT Email, Senha FROM Usuarios"
+
+    # Executar a consulta SQL
+    cursor.execute(sql)
+
+    # Recuperar os resultados da consulta
+    resultados = cursor.fetchall()
+
+    # Fechar conexão e cursor
+    cursor.close()
+    conexao.close()
+
+    # Retornar os resultados
+    return resultados
 
 @app.route('/user', methods=['GET'])
 def aluno():
-    if request.method == "GET": 
-        return jsonify({"response": "User"})
+    req = request.args
+    email = req['email']
+    senha = req['senha']
+    for d in obter_dados():
+        if email == d[0] and senha == d[1]:
+            return jsonify({"response": "Usuario encontrado"})
+    return jsonify({"response": "Usuario não encontrado"})
     
 @app.route('/ola', methods=['GET'])
 def ola():

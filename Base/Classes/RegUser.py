@@ -32,7 +32,7 @@ def Register ():
         name = req['name']
         email = req['email']
         senha = req['senha']
-        a = inserir_dados(id, name, email, senha)
+        inserir_dados(id, name, email, senha)
         id = id + 1
         
         return jsonify({"response": f"Usuário {name} com email: {email} cadastrado com sucesso!"})

@@ -1,52 +1,82 @@
 from flask import Flask, request, jsonify
 
-#import RegDisciplinas
-#import ConsAlunos
-#import RegAlunos
-
 app = Flask(__name__)
 
-# class MatriculaDisciplina ():
-#     def __init__(self, aluno: RegAlunos.Aluno, disciplinas):
-#         self.aluno = aluno
-#         self.disciplinas = disciplinas
+import mysql.connector
+
+def inserir_dados(dados):
+    # Estabelecer conexão com o banco de dados
+    conexao = mysql.connector.connect(
+        host='localhost',
+        password='root',
+        database='alunos_disciplinas'
+    )
+
+    cursor = conexao.cursor()
+
+    sql = "INSERT INTO tabela (Matricula, CodigoDisciplina) VALUES (%d, %d)"
+
+    cursor.execute(sql, dados)
+
+    conexao.commit()
+
+    cursor.close()
+    conexao.close()
+    
+def obter_dados():
+    # Estabelecer conexão com o banco de dados
+    conexao = mysql.connector.connect(
+        host='localhost',
+        password='root',
+        database='alunos_disciplinas'
+    )
+
+    cursor = conexao.cursor()
+
+    # Instrução SQL para selecionar os dados
+    sql = "SELECT Matricula, CodigoDisciplina FROM Matriculas"
+
+    # Executar a consulta SQL
+    cursor.execute(sql)
+
+    # Recuperar os resultados da consulta
+    resultados = cursor.fetchall()
+
+    # Fechar conexão e cursor
+    cursor.close()
+    conexao.close()
+
+    # Retornar os resultados
+    return resultados
 
 @app.route('/matdisc', methods=['POST'])
 def Register ():
     req = request.args
-    nameA = req['name aluno']
     mat = req['matricula']
+    codigo = req['codigo']
+    inserir_dados(mat, codigo)
+    return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Codigo: {codigo}"})
+
+@app.route('/matdiscDisciplina', methods=['GET'])
+def getDiscAluno():
+    req = request.args
+    mat = req['matricula']
+    resposta = f"Aluno de matricula {mat}, cadastrado em disciplinas:"
+    for d in obter_dados():
+        if mat == d[0]:
+            resposta += f"\n{d[1]}"
+    return jsonify({"response": resposta})
+
+@app.route('/matdiscAluno', methods=['GET'])
+def getAlunosDisc():
     req = request.args
     codigo = req['codigo']
-    nameD = req['name disciplina']
-    horario = req['horario']
-    turma = req['turma']
-    return jsonify({"response": f"Post Request Called. Name: {nameA}"})
+    resposta = f"Aluno de codigo {codigo}, com os alunos de matricula:"
+    for d in obter_dados():
+        if codigo == d[1]:
+            resposta += f"\n{d[0]}"
+    return jsonify({"response": resposta})
 
-    a = MatriculaDisciplina(aluno, disciplinas)
-    #colocar no BD
-    
-# def getDiscAluno(aluno: RegAlunos.Aluno):
-#     if ConsAlunos.buscaAluno(aluno) != None:
-#         #pegar lista de disciplinas do banco a partir do nome do aluno
-#         for d in RegDisciplinas:
-#             print(d)
-
-# def getAlunosDisc(disciplina: RegDisciplinas.Disciplina):
-#     #pegar na base de dados todos os alunos
-#     for a in RegAlunos:
-#         print(a)
-
-
-@app.route('/matdisc', methods=['GET', 'POST'])
-def matDisc():
-    if request.method == "GET": 
-        return jsonify({"response": "MatDisc"})
-    
-    elif request.method == "POST":
-        req = request.args
-        name = req['name']
-        return jsonify({"response": f"Post Request Called. Name: {name}"})
     
 @app.route('/ola', methods=['GET'])
 def ola():
