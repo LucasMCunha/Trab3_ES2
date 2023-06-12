@@ -1,27 +1,48 @@
 version: '3'
-
+ 
 services:
   regalunos:
-    build: 
+
+    container_name: sconsultar_alunos
+
+    build:
       context: Base/Classes
       dockerfile: Dockerfile
       args:
         FLASK_APP: ConsAlunos.py
-
+ 
     ports:
       - 5000:5000
+
     depends_on:
       - db
-
+ 
     environment:
-        MYSQL_HOST: ES2
         MYSQL_PASSWORD: 'root'
-      #ver como subir aplicacao flask como container
+
+    networks:
+      - redecomum
   db:
+    container_name: db
+
     image: mysql:latest
+
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_DATABASE: ES2
+
     ports:
       - 6000:3306
+    
+    volumes:
+      - db:/var/lib/mysql
+      - ./DataBase/tabelas.sql:/data/application/tabelas.sql
+    
 
+    networks:
+      - redecomum
+
+networks:
+  redecomum:
+
+volumes:
+  db:

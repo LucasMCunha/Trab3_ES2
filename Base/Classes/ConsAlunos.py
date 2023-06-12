@@ -53,4 +53,5 @@ def buscaAluno():
     return "Aluno não encontrado"
 
 if __name__ == '__main__':
+    print("TESTE")
     app.run(debug=True)
