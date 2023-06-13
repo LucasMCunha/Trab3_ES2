@@ -4,19 +4,22 @@ app = Flask(__name__)
 
 import mysql.connector
 
-def inserir_dados(dados):
+def inserir_dados(id, nome, email,senha):
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
-        host='localhost',
+        host='dbUsers',
+        user='root',
         password='root',
         database='users'
     )
 
     cursor = conexao.cursor()
 
-    sql = "INSERT INTO tabela (ID, Nome, Email, Senha) VALUES (%d, %s, %s, %s)"
+    sql = "INSERT INTO Usuarios (ID, Nome, Email, Senha) VALUES ({}, {}, {}, {})"
 
-    cursor.execute(sql, dados)
+    dados = (id, nome, email, senha)
+    lista = sql.format(*dados)
+    cursor.execute(lista)
 
     conexao.commit()
 
@@ -31,16 +34,15 @@ def Register ():
     if request.method == "POST":
         req = request.args
         name = req['name']
+        name = "\""+name+"\""
         email = req['email']
+        email = "\""+email+"\""
         senha = req['senha']
+        senha = "\""+senha+"\""
         inserir_dados(id, name, email, senha)
         id = id + 1
         
         return jsonify({"response": f"Usuário {name} com email: {email} cadastrado com sucesso!"})
-    
-@app.route('/ola', methods=['GET'])
-def ola():
-    return "Ola reg user"
     
 if __name__ == '__main__':
     app.run(debug=True)

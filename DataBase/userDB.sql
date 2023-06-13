@@ -9,4 +9,4 @@ CREATE TABLE Usuarios (
   Senha VARCHAR(100)
 );
 
-INSERT INTO Alunos (ID, Nome, Email, Senha) VALUES (0, "Julio Machado", "julio.machado@pucrs.br", "Julio123")
+INSERT INTO Alunos (ID, Nome, Email, Senha) VALUES (0, "Julio Machado", "julio.machado@pucrs.br", "Julio123");

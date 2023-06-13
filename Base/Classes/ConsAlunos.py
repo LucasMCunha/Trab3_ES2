@@ -2,21 +2,6 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-#alunos = [
-#    {
-#        'name': 'João',
-#        'number ID': 123456789,
-#        'address': 'Rua 1',
-#        'matricula': 1
-#    },
-#    {
-#        'name': 'Maria',
-#        'number ID': 987654321,
-#        'address': 'Rua A',
-#        'matricula': 2 
-#    }
-#]
-
 import mysql.connector
 
 def obter_dados():
@@ -57,10 +42,12 @@ def buscaTodos ():
 def buscaNome ():
     req = request.args
     parte = req['name']
+    listaAlunos = []
     for aluno in obter_dados():
-        if parte == aluno[1]:            
-            return jsonify(aluno)  # Retornar o aluno como uma resposta JSON
-    return "Aluno não encontrado"
+         for i in range(len(aluno[1])-len(parte)):
+             if(parte == aluno[1][i,len(parte)]):
+                 listaAlunos.append(aluno)
+    return jsonify(listaAlunos)
 
 #2. Consultar um estudante pelo número de matrícula. 
 @app.route('/alunos/matricula', methods=['GET'])

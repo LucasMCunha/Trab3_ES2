@@ -11,7 +11,7 @@ CREATE TABLE Matriculas (
   FOREIGN KEY (DisciplinaCodigo, DisciplinaTurma) REFERENCES Disciplinas (CodigoDisciplina, Turma)
 );
 
-INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (0, 0, 0, 10)
-INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (1, 1, 0, 10)
-INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (2, 0, 1, 30)
-INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (3, 1, 1, 31)
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (0, 0, 0, 10);
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (1, 1, 0, 10);
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (2, 0, 1, 30);
+INSERT INTO Matriculas (Id, AlunoId, DisciplinaId, DisciplinaTurma) VALUES (3, 1, 1, 31);

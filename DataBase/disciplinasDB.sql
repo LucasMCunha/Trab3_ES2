@@ -11,7 +11,7 @@ CREATE TABLE Disciplinas (
 );
 
 -- Inserir uma nova disciplina
-INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (0, "Fundamentos de Proagramação", "AB", 10)
-INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (0, "Fundamentos de Proagramação", "CD", 11)
-INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (1, "Métodos Numéricos", "JK", 30)
-INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (1, "Métodos Numéricos", "LM", 31)
+INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (0, "Fundamentos de Proagramação", "AB", 10);
+INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (0, "Fundamentos de Proagramação", "CD", 11);
+INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (1, "Métodos Numéricos", "JK", 30);
+INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (1, "Métodos Numéricos", "LM", 31);
