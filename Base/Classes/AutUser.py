@@ -7,7 +7,8 @@ import mysql.connector
 def obter_dados():
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
-        host='localhost', #mudar localhost
+        host='dbUsers',
+        user='root',
         password='root',
         database='users'
     )
@@ -40,11 +41,6 @@ def aluno():
         if email == d[0] and senha == d[1]:
             return jsonify({"response": f"Usuario encontrado, bem vindo {d[2]}"})
     return jsonify({"response": "Usuario não encontrado, email ou senha inválido"})
-
-#teste apagar depois    
-@app.route('/ola', methods=['GET'])
-def ola():
-    return "ola"
 
 if __name__ == '__main__':
     app.run(debug=True)

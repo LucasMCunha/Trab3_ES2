@@ -4,19 +4,22 @@ app = Flask(__name__)
 
 import mysql.connector
 
-def inserir_dados(dados):
+def inserir_dados(id, mat, codigo):
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
         host='dbAlunosDisciplinas',
+        user='root',
         password='root',
         database='alunos_disciplinas'
     )
 
     cursor = conexao.cursor()
 
-    sql = "INSERT INTO tabela (Matricula, CodigoDisciplina) VALUES (%d, %d)"
+    sql = "INSERT INTO Matriculas (Matricula, CodigoDisciplina) VALUES ({}, {})"
 
-    cursor.execute(sql, dados)
+    dados = (id, mat, codigo)
+    lista = sql.format(*dados)
+    cursor.execute(lista)
 
     conexao.commit()
 
@@ -26,7 +29,8 @@ def inserir_dados(dados):
 def obter_dados():
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
-        host='localhost',
+        host='dbAlunosDisciplinas',
+        user='root',
         password='root',
         database='alunos_disciplinas'
     )
@@ -57,8 +61,8 @@ id = 4 #O que é esse id?
 def Register ():
     global id
     req = request.args
-    mat = req['matricula']
-    codigo = req['codigo']
+    mat = int(req['matricula'])
+    codigo = int(req['codigo'])
     inserir_dados(id, mat, codigo)
     id = id + 1
     return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Codigo: {codigo}"})

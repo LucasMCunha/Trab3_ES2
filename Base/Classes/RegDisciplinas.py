@@ -4,19 +4,22 @@ app = Flask(__name__)
 
 import mysql.connector
 
-def inserir_dados(dados):
+def inserir_dados(codigo, name, horario, turma):
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
         host='dbDisciplinas',
+        user='root',
         password='root',
         database='disciplinas'
     )
 
     cursor = conexao.cursor()
 
-    sql = "INSERT INTO tabela (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES (%d, %s, %s, %d)"
+    sql = "INSERT INTO Disciplinas (CodigoDisciplina, NomeDisciplina, HorarioDisciplina, Turma) VALUES ({}, {}, {}, {})"
 
-    cursor.execute(sql, dados)
+    dados = (codigo, name, horario, turma)
+    lista = sql.format(*dados)
+    cursor.execute(lista)
 
     conexao.commit()
 
@@ -34,7 +37,9 @@ def Register ():
         req = request.args
         codigo = int(req['codigo'])
         name = req['name']
+        name = "\""+name+"\""
         horario = req['horario']
+        horario = "\""+horario+"\""
         turma = int(req['turma'])
         inserir_dados(codigo, name, horario, turma)
         return jsonify({"response": f"Disciplina nova criada. Codigo {codigo}, Name: {name}, Horario {horario}, Turma {turma}"})
