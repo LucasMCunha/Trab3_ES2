@@ -3,11 +3,11 @@ use alunos;
 
 -- Tabela Alunos
 CREATE TABLE Alunos (
-  --Matricula INT PRIMARY KEY,
-  Matricula MEDIUMINT NOT NULL AUTO_INCREMENT,
+  Matricula INT NOT NULL AUTO_INCREMENT,
   Nome VARCHAR(255) NOT NULL,
   DocumentoIdentificacao INT NOT NULL,
-  Endereco VARCHAR(255) NOT NULL
+  Endereco VARCHAR(255) NOT NULL,
+  PRIMARY KEY (Matricula)
 );
 
 
