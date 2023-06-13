@@ -7,7 +7,7 @@ import mysql.connector
 def inserir_dados(dados):
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
-        host='localhost',
+        host='dbDisciplinas',
         password='root',
         database='disciplinas'
     )
@@ -24,7 +24,10 @@ def inserir_dados(dados):
     conexao.close()
 
 
-    
+#5. Cadastrar disciplinas, com os dados: código da disciplina, nome da disciplina, horário da 
+#disciplina (por códigos: A, B, C, D, E, F, G), turma da disciplina (código numérico). Lembre-se 
+#que uma mesma disciplina (mesmo código e nome) pode ocorrer mais de uma vez (turmas 
+#diferentes). 
 @app.route('/disc', methods=['POST'])
 def Register ():
     if request.method == "POST":
@@ -35,10 +38,6 @@ def Register ():
         turma = int(req['turma'])
         inserir_dados(codigo, name, horario, turma)
         return jsonify({"response": f"Disciplina nova criada. Codigo {codigo}, Name: {name}, Horario {horario}, Turma {turma}"})
-    
-@app.route('/ola', methods=['GET'])
-def ola():
-    return "Ola"
  
 if __name__ == '__main__':
     app.run(debug=True)

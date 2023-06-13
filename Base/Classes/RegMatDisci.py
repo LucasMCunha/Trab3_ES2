@@ -7,7 +7,7 @@ import mysql.connector
 def inserir_dados(dados):
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
-        host='localhost',
+        host='dbAlunosDisciplinas',
         password='root',
         database='alunos_disciplinas'
     )
@@ -49,8 +49,10 @@ def obter_dados():
     # Retornar os resultados
     return resultados
 
-id = 4
+id = 4 #O que é esse id?
 
+#6. Matricular estudante em uma disciplina: informar número de matrícula do estudante, código 
+#e turma da disciplina.
 @app.route('/matdisc', methods=['POST'])
 def Register ():
     global id
@@ -61,6 +63,7 @@ def Register ():
     id = id + 1
     return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Codigo: {codigo}"})
 
+#7. Consultar as disciplinas/turmas em que um estudante está matriculado.
 @app.route('/matdiscDisciplina', methods=['GET'])
 def getDiscAluno():
     req = request.args
@@ -71,6 +74,7 @@ def getDiscAluno():
             resposta += f"\n{d[1]}"
     return jsonify({"response": resposta})
 
+#8. Consultar os estudantes matriculados em uma disciplina/turma.
 @app.route('/matdiscAluno', methods=['GET'])
 def getAlunosDisc():
     req = request.args
@@ -80,11 +84,6 @@ def getAlunosDisc():
         if codigo == d[1]:
             resposta += f"\n{d[0]}"
     return jsonify({"response": resposta})
-
-    
-@app.route('/ola', methods=['GET'])
-def ola():
-    return "Ola reg mat disc"
     
 if __name__ == '__main__':
     app.run(debug=True)

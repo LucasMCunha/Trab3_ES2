@@ -46,10 +46,13 @@ def obter_dados():
     # Retornar os resultados
     return resultados
 
+# 4. Consultar a lista de todos os estudantes.
 @app.route('/alunos/todos', methods=['GET'])
 def buscaTodos (): 
     return jsonify(obter_dados())
 
+#3. Consultar um estudante por um pedaço de seu nome. Se houver mais de um "match", 
+#retornar uma lista.
 @app.route('/alunos/nome', methods=['GET'])
 def buscaNome ():
     req = request.args
@@ -59,6 +62,7 @@ def buscaNome ():
             return jsonify(aluno)  # Retornar o aluno como uma resposta JSON
     return "Aluno não encontrado"
 
+#2. Consultar um estudante pelo número de matrícula. 
 @app.route('/alunos/matricula', methods=['GET'])
 def buscaMatricula ():
     req = request.args
@@ -68,6 +72,7 @@ def buscaMatricula ():
             return jsonify(aluno)  # Retornar o aluno como uma resposta JSON
     return "Aluno não encontrado"
 
+#qual é esse?
 @app.route('/alunos/aluno', methods=['GET'])
 def buscaAluno():
     req = request.args
