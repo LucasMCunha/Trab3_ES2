@@ -4,20 +4,20 @@ app = Flask(__name__)
 
 import mysql.connector
 
-def inserir_dados(id, mat, codigo):
+def inserir_dados(mat, codigo, turma):
     # Estabelecer conexão com o banco de dados
     conexao = mysql.connector.connect(
         host='dbAlunosDisciplinas',
         user='root',
         password='root',
-        database='alunos_disciplinas'
+        database='alunosDisciplinas'
     )
 
     cursor = conexao.cursor()
 
-    sql = "INSERT INTO Matriculas (Matricula, CodigoDisciplina) VALUES ({}, {})"
+    sql = "INSERT INTO Matriculas (AlunoMatricula, DisciplinaCodigo, DisciplinaTurma) VALUES ({}, {}, {})"
 
-    dados = (id, mat, codigo)
+    dados = (mat, codigo, turma)
     lista = sql.format(*dados)
     cursor.execute(lista)
 
@@ -32,13 +32,13 @@ def obter_dados():
         host='dbAlunosDisciplinas',
         user='root',
         password='root',
-        database='alunos_disciplinas'
+        database='alunosDisciplinas'
     )
 
     cursor = conexao.cursor()
 
     # Instrução SQL para selecionar os dados
-    sql = "SELECT Matricula, CodigoDisciplina FROM Matriculas"
+    sql = "SELECT AlunoMatricula, DisciplinaCodigo, DisciplinaTurma FROM Matriculas"
 
     # Executar a consulta SQL
     cursor.execute(sql)
@@ -59,12 +59,11 @@ id = 4 #O que é esse id?
 #e turma da disciplina.
 @app.route('/matdisc', methods=['POST'])
 def Register ():
-    global id
     req = request.args
     mat = int(req['matricula'])
     codigo = int(req['codigo'])
-    inserir_dados(id, mat, codigo)
-    id = id + 1
+    turma = int(req['turma'])
+    inserir_dados(mat, codigo, turma)
     return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Codigo: {codigo}"})
 
 #7. Consultar as disciplinas/turmas em que um estudante está matriculado.

@@ -6,7 +6,7 @@ CREATE TABLE Disciplinas (
   CodigoDisciplina INT NOT NULL,
   NomeDisciplina VARCHAR(100),
   HorarioDisciplina VARCHAR(50),
-  Turma INT NOT NULL
+  Turma INT NOT NULL,
   PRIMARY KEY (CodigoDisciplina, Turma)
 );
 

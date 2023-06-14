@@ -44,9 +44,8 @@ def buscaNome ():
     parte = req['name']
     listaAlunos = []
     for aluno in obter_dados():
-         for i in range(len(aluno[1])-len(parte)):
-             if(parte == aluno[1][i,len(parte)]):
-                 listaAlunos.append(aluno)
+        if(aluno[1].find(parte) != -1):
+            listaAlunos.append(aluno)
     return jsonify(listaAlunos)
 
 #2. Consultar um estudante pelo número de matrícula. 

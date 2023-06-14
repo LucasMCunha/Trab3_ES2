@@ -169,6 +169,8 @@ services:
 
     image: mysql:latest
 
+    command: --init-file /data/application/disciplinasDB.sql
+
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
 
@@ -190,6 +192,8 @@ services:
 
     image: mysql:latest
 
+    command: --init-file /data/application/userDB.sql
+
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
 
@@ -210,6 +214,8 @@ services:
     container_name: dbAlunosDisciplinas
 
     image: mysql:latest
+
+    command: --init-file /data/application/alunos_disciplinasDB.sql
 
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
