@@ -64,29 +64,30 @@ def Register ():
     codigo = int(req['codigo'])
     turma = int(req['turma'])
     inserir_dados(mat, codigo, turma)
-    return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Codigo: {codigo}"})
+    return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Disciplina: {codigo}, Turma: {turma}"})
 
 #7. Consultar as disciplinas/turmas em que um estudante está matriculado.
 @app.route('/matdiscDisciplina', methods=['GET'])
 def getDiscAluno():
     req = request.args
-    mat = req['matricula']
-    resposta = f"Aluno de matricula {mat}, cadastrado em disciplinas:"
+    mat = int(req['matricula'])
+    resposta = f"Aluno de matricula {mat}, cadastrado em: "
     for d in obter_dados():
         if mat == d[0]:
-            resposta += f"\n{d[1]}"
-    return jsonify({"response": resposta})
+            resposta += f"disciplina com código {d[1]}/turma número {d[2]}|"
+    return jsonify({"response": resposta[:-1]})
 
 #8. Consultar os estudantes matriculados em uma disciplina/turma.
 @app.route('/matdiscAluno', methods=['GET'])
 def getAlunosDisc():
     req = request.args
-    codigo = req['codigo']
-    resposta = f"Aluno de codigo {codigo}, com os alunos de matricula:"
+    codigo = int(req['codigo'])
+    turma = int(req['turma'])
+    resposta = f"Disciplinas de codigo {codigo} na turma {turma}:"
     for d in obter_dados():
-        if codigo == d[1]:
-            resposta += f"\n{d[0]}"
-    return jsonify({"response": resposta})
+        if codigo == d[1] and turma == d[2]:
+            resposta += f"Alunos de matricula {d[0]};"
+    return jsonify({"response": resposta[:-1]})
     
 if __name__ == '__main__':
     app.run(debug=True)

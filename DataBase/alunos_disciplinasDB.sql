@@ -3,11 +3,10 @@ CREATE DATABASE alunosDisciplinas;
 use alunosDisciplinas;
 
 CREATE TABLE Matriculas (
-  Id INT NOT NULL AUTO_INCREMENT,
   AlunoMatricula INT NOT NULL,
   DisciplinaCodigo INT NOT NULL,
   DisciplinaTurma INT NOT NULL,
-  PRIMARY KEY (Id)
+  PRIMARY KEY (AlunoMatricula, DisciplinaCodigo)
 );
 
 INSERT INTO Matriculas (AlunoMatricula, DisciplinaCodigo, DisciplinaTurma) VALUES (0, 0, 10);

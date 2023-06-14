@@ -31,7 +31,7 @@ def obter_dados():
     # Retornar os resultados
     return resultados
 
-#Qual é esse
+#10. Efetuar autenticação/autorização (ponto extra).
 @app.route('/user', methods=['GET'])
 def aluno():
     req = request.args
