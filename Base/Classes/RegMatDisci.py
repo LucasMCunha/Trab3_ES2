@@ -133,10 +133,12 @@ def Register ():
 def getDiscAluno():
     req = request.args
     mat = int(req['matricula'])
+    if not verifica_matricula(mat):
+        return jsonify({"response": f"Aluno com a matricula {mat} não foi encontrado"})
     resposta = f"Aluno de matricula {mat}, cadastrado em: "
     for d in obter_dados():
         if mat == d[0]:
-            resposta += f"disciplina com código {d[1]}/turma número {d[2]}|"
+            resposta += f" disciplina com código {d[1]} na turma número {d[2]}|"
     return jsonify({"response": resposta[:-1]})
 
 #8. Consultar os estudantes matriculados em uma disciplina/turma.
@@ -145,10 +147,12 @@ def getAlunosDisc():
     req = request.args
     codigo = int(req['codigo'])
     turma = int(req['turma'])
-    resposta = f"Disciplinas de codigo {codigo} na turma {turma}:"
+    if not verifica_disciplina(codigo, turma):
+        return jsonify({"response": f"Disciplina com a código {codigo} e turma {turma} não foi encontrado"})
+    resposta = f"Disciplina de codigo {codigo} na turma {turma}:"
     for d in obter_dados():
         if codigo == d[1] and turma == d[2]:
-            resposta += f"Alunos de matricula {d[0]};"
+            resposta += f" aluno de matricula {d[0]};"
     return jsonify({"response": resposta[:-1]})
     
 if __name__ == '__main__':

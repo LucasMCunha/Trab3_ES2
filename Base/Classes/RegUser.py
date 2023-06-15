@@ -26,7 +26,8 @@ def inserir_dados(nome, email,senha):
     cursor.close()
     conexao.close()
 
-
+# 9. Registrar usuário do sistema, com seu e-mail, nome e senha para fins de 
+# autenticação/autorização (ponto extra).
 @app.route('/User', methods=['POST'])
 def Register ():
     if request.method == "POST":
