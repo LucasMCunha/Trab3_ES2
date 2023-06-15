@@ -18,8 +18,7 @@ services:
     depends_on:
       - dbAlunos
  
-    environment:
-        MYSQL_PASSWORD: 'root'
+ 
 
     networks:
       - redecomum
@@ -41,8 +40,7 @@ services:
     depends_on:
       - dbUsers
  
-    environment:
-        MYSQL_PASSWORD: 'root'
+ 
 
     networks:
       - redecomum
@@ -64,8 +62,7 @@ services:
     depends_on:
       - dbAlunos
  
-    environment:
-        MYSQL_PASSWORD: 'root'
+ 
 
     networks:
       - redecomum
@@ -87,8 +84,7 @@ services:
     depends_on:
       - dbDisciplinas
  
-    environment:
-        MYSQL_PASSWORD: 'root'
+ 
 
     networks:
       - redecomum
@@ -109,9 +105,9 @@ services:
 
     depends_on:
       - dbAlunosDisciplinas
+      - dbDisciplinas
+      - dbAlunos
  
-    environment:
-        MYSQL_PASSWORD: 'root'
 
     networks:
       - redecomum
@@ -133,8 +129,7 @@ services:
     depends_on:
       - dbUsers
  
-    environment:
-        MYSQL_PASSWORD: 'root'
+ 
 
     networks:
       - redecomum

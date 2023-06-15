@@ -53,7 +53,62 @@ def obter_dados():
     # Retornar os resultados
     return resultados
 
-id = 4 #O que é esse id?
+def verifica_matricula(mat):
+    # Estabelecer conexão com o banco de dados
+    conexao = mysql.connector.connect(
+        host='dbAlunos',
+        user='root',
+        password='root',
+        database='alunos'
+    )
+
+    cursor = conexao.cursor()
+
+    # Instrução SQL para selecionar os dados
+    sql = "SELECT Matricula FROM Alunos"
+
+    # Executar a consulta SQL
+    cursor.execute(sql)
+
+    # Recuperar os resultados da consulta
+    resultados = cursor.fetchall()
+
+    # Fechar conexão e cursor
+    cursor.close()
+    conexao.close()
+    
+    for r in resultados:
+        if r[0] == mat:
+            return True
+    return False
+
+def verifica_disciplina(codigo, turma):
+    conexao = mysql.connector.connect(
+        host='dbDisciplinas',
+        user='root',
+        password='root',
+        database='disciplinas'
+    )
+    
+    cursor = conexao.cursor()
+
+    # Instrução SQL para selecionar os dados
+    sql = "SELECT CodigoDisciplina, Turma FROM Disciplinas"
+
+    # Executar a consulta SQL
+    cursor.execute(sql)
+
+    # Recuperar os resultados da consulta
+    resultados = cursor.fetchall()
+
+    # Fechar conexão e cursor
+    cursor.close()
+    conexao.close()
+    
+    for r in resultados:
+        if r[0] == codigo and r[1] == turma:
+            return True
+    return False
 
 #6. Matricular estudante em uma disciplina: informar número de matrícula do estudante, código 
 #e turma da disciplina.
@@ -63,6 +118,13 @@ def Register ():
     mat = int(req['matricula'])
     codigo = int(req['codigo'])
     turma = int(req['turma'])
+    
+    if not verifica_matricula(mat):
+        return jsonify({"response": f"Aluno com a matricula {mat} não foi encontrado"})
+    
+    if not verifica_disciplina(codigo, turma):
+        return jsonify({"response": f"Disciplina com a código {codigo} e turma {turma} não foi encontrado"})
+    
     inserir_dados(mat, codigo, turma)
     return jsonify({"response": f"Aluno cadastrado na disciplina. Matricula: {mat}, Disciplina: {codigo}, Turma: {turma}"})
 
